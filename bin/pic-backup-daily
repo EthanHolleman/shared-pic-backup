@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# rclone pics to google drive
+
+echo "STARTING BACKUP"
+mkdir /home/pi/bin/logs
+mkdir /home/pi/bin/md5sums
+date=$(date +'%m-%d-%Y')
+
+# copy pictures
+rclone copy "davis-gdrive:/Boi Pics V2" davis-gdrive:syncs/boi-pics-V2
+
+# make md5checksums of all files
+rclone md5sum "davis-gdrive:/Boi Pics V2" > "/home/pi/bin/md5sums/${date}-md5sums.txt"
+
+# copy the checksums to remote storage
+rclone copy /home/pi/bin/md5sums "davis-gdrive:/Boi Pics V2/md5sums"
+
+echo "COMPLETE"

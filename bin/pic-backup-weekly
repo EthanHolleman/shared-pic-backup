@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Download and compress a complete version of pictures weekly to local storage.
+# This is usually a flash drive attached to the Rpi the scripts are running on.
+
+date=$(date +'%m-%d-%Y')
+
+local_storage=''  # name of local storage device
+target_dir="/media/pi/$local_storage/boi-pics-frozen/$date"  # local dir to copy to
+target_dir_zip="$target_dir.zip"  # zipped version of local_dir
+backup_dir="$target_dir/$date"  # parent of target_dir
+zip_target="$target_dir.zip"  # zip verion of backup_dir
+
+rclone copy "davis-gdrive:/Boi Pics V2" "$backup_dir" -P
+zip -rm $zip_target $backup_dir
+md5sum $zip_target > "$target_dir/md5sums.txt"
+zip -rm $target_dir $target_dir_zip
+rclone copy target_dir_zip "davis-gdrive:syncs/boi-pics-frozen" -P
