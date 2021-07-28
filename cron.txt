@@ -1,3 +1,3 @@
 # cron jobs for each script
-0 0 * * * /home/pi/bin/pic-backup-daily &  # everyday at midnight
-0 0 * * 2 /home/pi/bin/pic-backup-weekly &  # once a week every tuesday
+0 0 * * * /home/pi/shared-pic-backup/bin/pic-backup-daily &  # everyday at midnight
+0 0 * * 2 /home/pi/shared-pic-backup/bin/pic-backup-weekly &  # once a week every tuesday
