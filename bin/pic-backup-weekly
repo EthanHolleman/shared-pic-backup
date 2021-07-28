@@ -6,7 +6,7 @@
 date=$(date +'%m-%d-%Y')
 
 local_storage='USB31FD'  # name of local storage device
-parent_dir "/media/pi/$local_storage/boi-pics-frozen"
+parent_dir="/media/pi/$local_storage/boi-pics-frozen"
 target_dir="/media/pi/$local_storage/boi-pics-frozen/$date"  # local dir to copy to
 target_dir_zip="$target_dir.zip"  # zipped version of local_dir
 backup_dir="$target_dir/$date"  # parent of target_dir
