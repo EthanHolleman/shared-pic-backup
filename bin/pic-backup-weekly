@@ -5,13 +5,14 @@
 
 date=$(date +'%m-%d-%Y')
 
-local_storage=''  # name of local storage device
+local_storage='USB31FD'  # name of local storage device
 target_dir="/media/pi/$local_storage/boi-pics-frozen/$date"  # local dir to copy to
 target_dir_zip="$target_dir.zip"  # zipped version of local_dir
 backup_dir="$target_dir/$date"  # parent of target_dir
 zip_target="$target_dir.zip"  # zip verion of backup_dir
 
 rclone copy "davis-gdrive:/Boi Pics V2" "$backup_dir" -P
+python3 filesize.py $target_dir 100
 zip -rm $zip_target $backup_dir
 md5sum $zip_target > "$target_dir/md5sums.txt"
 zip -rm $target_dir $target_dir_zip
